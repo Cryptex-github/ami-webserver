@@ -61,7 +61,6 @@ async def delete_file(hmac_hash: str, filename: str):
     if hmac.compare_digest(hmac_hash, _hmac_hash) is False:
         return Response(content="File not found, HMAC key doesn't match filename", status_code=404)
     file_path = safe_join(UPLOAD_PATH, filename)
-    return file_path
     if os.path.isfile(file_path) is False:
         return Response(content="File not found", status_code=404)
     os.remove(file_path)
