@@ -3,7 +3,7 @@ from aiofile import async_open
 
 UPLOAD_PATH = os.path.join(os.getcwd(), 'uploads')
 from fastapi import APIRouter
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse, PlainTextResponse
 from werkzeug.utils import safe_join
 
 root_router = APIRouter()
@@ -12,3 +12,10 @@ root_router = APIRouter()
 async def root():
     async with async_open(os.path.join(os.getcwd(), "templates", "index.html"), "r") as afp:
         return await afp.read()
+
+@root_router.get("/robots.txt", response_class=PlainTextResponse)
+async def robots():
+    return """
+User-agent: *
+Disallow:
+"""
