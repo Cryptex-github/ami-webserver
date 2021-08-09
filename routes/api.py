@@ -40,11 +40,11 @@ async def upload(file: UploadFile = Form(...)):
         await afp.write(await file.read())
         afp.seek(0)
 
-    url = f"https://amidiscord.xyz/uploads/{filename}"
+    url = f"https://cdn.amidiscord.xyz/uploads/{filename}"
 
     hmac_hash = hmac.new(SECRET_KEY.encode(), filename.encode(), "sha256").hexdigest()
 
-    delete_url = f"https://amidiscord.xyz/api/delete-file/{hmac_hash}/{filename}"
+    delete_url = f"https://cdn.amidiscord.xyz/api/delete-file/{hmac_hash}/{filename}"
 
     embed = discord.Embed(title="**New file has been uploaded!**", description=url, timestamp=datetime.utcnow(), color=discord.Color.random())
     embed.add_field(name="URL", value=f"[**Click here to view!**]({url})")
