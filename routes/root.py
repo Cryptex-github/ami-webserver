@@ -1,3 +1,6 @@
+import os
+
+UPLOAD_PATH = os.path.join(os.getcwd(), 'app', 'uploads')
 from fastapi import APIRouter
 from fastapi.responses import FileResponse
 from werkzeug import safe_join
@@ -18,5 +21,5 @@ Disallow:
 
 @root_router.get("/uploads/{filename}")
 async def uploads(filename: str):
-    file_path = safe_join("/app/uploads/", filename)
+    file_path = safe_join(UPLOAD_PATH, filename)
     return FileResponse(path=file_path, filename=filename)
