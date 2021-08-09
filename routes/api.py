@@ -26,8 +26,8 @@ async def upload(file: UploadFile = Form(...)):
         return Response(content="Unsupported file type", status_code=415)
     ext = ext.replace(".", "")
     filename = f"{filename}.{ext}"
-    if os.path.isdir("/app/uploads/") is False:
-        os.mkdir("/app/uploads/")
+    if os.path.isdir(UPLOAD_PATH) is False:
+        os.mkdir(UPLOAD_PATH)
     
     save_path = safe_join(UPLOAD_PATH, filename)
     await file.seek(0)
