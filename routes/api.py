@@ -1,9 +1,9 @@
 import os
 
 from dotenv import load_dotenv
+load_dotenv()
 from fastapi import APIRouter, UploadFile
 
-load_dotenv()
 UPLOAD_PATH = os.path.join(os.getcwd(), 'app', 'uploads')
 DISCORD_WEBHOOK = os.getenv('DISCORD_WEBHOOK')
 SECRET_KEY = os.getenv('SECRET_KEY')
