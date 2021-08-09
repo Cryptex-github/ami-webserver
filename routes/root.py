@@ -13,9 +13,9 @@ async def root():
     async with async_open(os.path.join(os.getcwd(), "templates", "index.html"), "r") as afp:
         return await afp.read()
 
-@root_router.get("/robots.txt", response_class=PlainTextResponse)
+@root_router.get("/robots.txt")
 async def robots():
-    return """
+    return PlainTextResponse("""
 User-agent: *
 Disallow:
-"""
+""", media_type="text/plain")
