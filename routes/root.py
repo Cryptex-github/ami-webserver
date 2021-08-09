@@ -12,10 +12,3 @@ root_router = APIRouter()
 async def root():
     async with async_open(os.path.join(os.getcwd(), "templates", "index.html"), "r") as afp:
         return await afp.read()
-
-@root_router.get("/robots.txt")
-async def robots():
-    return """
-User-agent: *
-Disallow:
-"""
