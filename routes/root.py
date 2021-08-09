@@ -1,18 +1,17 @@
 import os
+from aiofile import async_open
 
 UPLOAD_PATH = os.path.join(os.getcwd(), 'uploads')
-from fastapi import APIRouter, Request
+from fastapi import APIRouter
 from fastapi.responses import FileResponse, HTMLResponse
-from fastapi.templating import Jinja2Templates
 from werkzeug.utils import safe_join
 
 root_router = APIRouter()
 
-templates = Jinja2Templates(directory="templates")
-
 @root_router.get("/", response_class=HTMLResponse)
 async def root(request: Request, id: str):
-    return templates.TemplateResponse("index.html", {"request": request, "id": id})
+    async with async_open(os.path.join(os.getcwd(), "templates", "index.html"), "r") as afp:
+        return await afp.read()
 
 @root_router.get("/robots.txt")
 async def robots():
