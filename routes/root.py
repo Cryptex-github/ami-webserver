@@ -2,7 +2,7 @@ import os
 from aiofile import async_open
 
 from fastapi import APIRouter
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTMLResponse
 from werkzeug.utils import safe_join
 
 root_router = APIRouter()
