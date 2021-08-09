@@ -15,6 +15,7 @@ from mimetypes import guess_extension
 import aiohttp
 import discord
 from fastapi.responses import Response, ORJSONResponse
+from werkzeug.utils import safe_join
 webhook = discord.Webhook.from_url(DISCORD_WEBHOOK, adapter=discord.AsyncWebhookAdapter(aiohttp.ClientSession()))
 
 api_router = APIRouter()
