@@ -1,5 +1,5 @@
 fastapi
-uviorn[standard]
+uvicorn[standard]
 orjson
 uvloop
 werkzeug
