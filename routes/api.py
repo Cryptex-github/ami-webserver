@@ -1,7 +1,5 @@
 import os
 
-from dotenv import load_dotenv
-load_dotenv()
 from fastapi import APIRouter, UploadFile
 
 UPLOAD_PATH = os.path.join(os.getcwd(), 'app', 'uploads')
