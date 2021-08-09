@@ -55,7 +55,7 @@ async def upload(file: UploadFile = Form(...)):
 
     return ORJSONResponse({"url": url, "delete_url": delete_url}, status_code=201)
 
-@api_router.delete("/delete-file/{hmac_hash}/{filename}")
+@api_router.get("/delete-file/{hmac_hash}/{filename}")
 async def delete_file(hmac_hash: str, filename: str):
     _hmac_hash = hmac.new(SECRET_KEY.encode(), f"{filename}.{filename.split('.')[-1]}".encode(), "sha256").hexdigest()
     if hmac.compare_digest(hmac_hash, _hmac_hash) is False:
