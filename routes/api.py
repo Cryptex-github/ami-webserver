@@ -23,7 +23,7 @@ api_router = APIRouter()
 @api_router.post("/upload")
 async def upload(file: UploadFile = Form(...)):
     filename = secrets.token_urlsafe(12)
-    await file.read(8000)
+    file_bytes = await file.read(8000)
     mine = from_buffer(file_bytes, mime=True).lower()
     ext = guess_extension(mine)
     if ext is None:
