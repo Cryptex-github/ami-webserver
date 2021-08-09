@@ -6,7 +6,7 @@ TOKEN = os.getenv("AUTH")
 
 async def auth(request, call_next):
     
-    if request.url.path in ["/", "/robots.txt"] or request.url.path.startswith("/api/delete-file"):
+    if not request.url.path.startswith("/api/upload"):
         return await call_next(request)
     
     try:
