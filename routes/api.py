@@ -5,7 +5,7 @@ from fastapi import APIRouter, UploadFile
 
 load_dotenv()
 UPLOAD_PATH = os.path.join(os.getcwd(), 'app', 'uploads')
-DISCORD_WEBHOOK = os.getenv('DISCORD_WEBHOOKS')
+DISCORD_WEBHOOK = os.getenv('DISCORD_WEBHOOK')
 SECRET_KEY = os.getenv('SECRET_KEY')
 import hmac
 import secrets
