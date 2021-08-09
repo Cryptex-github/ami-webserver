@@ -1,6 +1,7 @@
 import os
 
 from fastapi import APIRouter, UploadFile, Form
+from aiofile import async_open
 
 UPLOAD_PATH = os.path.join(os.getcwd(), 'uploads')
 DISCORD_WEBHOOK = os.getenv('DISCORD_WEBHOOK')
@@ -31,8 +32,10 @@ async def upload(file: UploadFile = Form(...)):
     
     save_path = safe_join(UPLOAD_PATH, filename)
     await file.seek(0)
-
-    await file.save(save_path)
+    
+    async with async_open(save_path, "wb+") as afp:
+        await afp.write(await file.read())
+        afp.seek(0)
 
     url = f"https://amidiscord.xyz/uploads/{filename}"
 
