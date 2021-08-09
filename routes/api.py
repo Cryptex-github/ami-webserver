@@ -59,7 +59,7 @@ async def upload(file: UploadFile = Form(...)):
 async def delete_file(hmac_hash: str, filename: str):
     _hmac_hash = hmac.new(SECRET_KEY.encode(), f"{filename}".encode(), "sha256").hexdigest()
     if hmac.compare_digest(hmac_hash, _hmac_hash) is False:
-        return Response(content="File not found", status_code=404)
+        return Response(content="File not found, HMAC key doesn't match filename", status_code=404)
     file_path = safe_join(UPLOAD_PATH, filename)
     if os.path.isfile(file_path) is False:
         return Response(content="File not found", status_code=404)
