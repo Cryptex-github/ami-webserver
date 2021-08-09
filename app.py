@@ -13,8 +13,8 @@ origins = [
 ]
 
 app = FastAPI(docs_url=None, redoc_url=None)
-app.include_router(api_router, prefix="/api")
-app.include_router(root_router, prefix="/")
+app.include_router(api_router, prefix="api")
+app.include_router(root_router)
 app.add_middleware(BaseHTTPMiddleware, auth)
 app.add_middleware(CORSMiddleware, 
     allow_origins=origins,
