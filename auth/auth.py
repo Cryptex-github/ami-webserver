@@ -17,3 +17,6 @@ async def auth(request, call_next):
             return await call_next(request)
         
         return ORJSONResponse({"message": "Invalid token"}, status_code=401)
+    
+    except KeyError:
+        return ORJSONResponse({"message": "Missing authorization header"}, status_code=401)
