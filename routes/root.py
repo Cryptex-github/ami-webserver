@@ -1,6 +1,6 @@
 import os
 
-UPLOAD_PATH = os.path.join(os.getcwd(), 'app', 'uploads')
+UPLOAD_PATH = os.path.join(os.getcwd(), 'uploads')
 from fastapi import APIRouter
 from fastapi.responses import FileResponse
 from werkzeug.utils import safe_join
