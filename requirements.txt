@@ -1,0 +1,8 @@
+fastapi
+univorn[standard]
+orjson
+uvloop
+werkzeug
+aiohttp
+discord.py
+python-dotenv
