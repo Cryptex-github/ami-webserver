@@ -9,6 +9,13 @@ root_router = APIRouter()
 async def root():
     return {"Hello": "World"}
 
+@root_router.get("/robots.txt")
+async def robots():
+    return """
+User-agent: *
+Disallow:
+"""
+
 @root_router.get("/uploads/{filename}")
 async def uploads(filename: str):
     file_path = safe_join("/app/uploads/", filename)
