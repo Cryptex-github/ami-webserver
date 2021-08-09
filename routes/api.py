@@ -16,9 +16,9 @@ import discord
 from fastapi.response import Response, ORJSONResponse
 webhook = discord.Webhook.from_url(DISCORD_WEBHOOK, adapter=discord.AsyncWebhookAdapter(aiohttp.ClientSession()))
 
-router = APIRouter()
+api_router = APIRouter()
 
-@router.post("/upload")
+@api_router.post("/upload")
 async def upload(file: UploadFile):
     filename = secrets.token_urlsafe(12)
     ext = guess_extension(file.content_type)
@@ -48,7 +48,7 @@ async def upload(file: UploadFile):
 
     return ORJSONResponse({"url": url, "delete_url": delete_url}, status_code=201)
 
-@router.delete("/delete-file/{hmac_hash}/{filename}")
+@api_router.delete("/delete-file/{hmac_hash}/{filename}")
 async def delete_file(hmac_hash: str, filename: str):
     _hmac_hash = hmac.new(SECRET_KEY.encode(), f"{filename}.{filename.split('.')[-1]}".encode(), "sha256").hexdigest()
     if hmac.compare_digest(hmac_hash, _hmac_hash) is False:
