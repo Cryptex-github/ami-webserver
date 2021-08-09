@@ -2,7 +2,7 @@ import os
 
 from fastapi import APIRouter, UploadFile, Form
 
-UPLOAD_PATH = os.path.join(os.getcwd(), 'app', 'uploads')
+UPLOAD_PATH = os.path.join(os.getcwd(), 'uploads')
 DISCORD_WEBHOOK = os.getenv('DISCORD_WEBHOOK')
 SECRET_KEY = os.getenv('SECRET_KEY')
 import hmac
