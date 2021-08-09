@@ -9,6 +9,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 import hmac
 import secrets
 from datetime import datetime
+from magic import from_buffer
 from mimetypes import guess_extension
 
 import aiohttp
@@ -22,7 +23,9 @@ api_router = APIRouter()
 @api_router.post("/upload")
 async def upload(file: UploadFile = Form(...)):
     filename = secrets.token_urlsafe(12)
-    ext = guess_extension(file.content_type)
+    await file.read(8000)
+    mine = from_buffer(file_bytes, mime=True).lower()
+    ext = guess_extension(mine)
     if ext is None:
         return Response(content="Unsupported file type", status_code=415)
     ext = ext.replace(".", "")
