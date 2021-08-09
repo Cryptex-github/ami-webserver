@@ -19,10 +19,3 @@ async def robots():
 User-agent: *
 Disallow:
 """
-
-@root_router.get("/uploads/{filename}/")
-async def uploads(filename: str):
-    return filename
-
-    file_path = safe_join(UPLOAD_PATH, filename)
-    return FileResponse(path=file_path, filename=filename)
