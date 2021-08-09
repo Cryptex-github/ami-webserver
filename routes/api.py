@@ -65,6 +65,3 @@ async def delete_file(hmac_hash: str, filename: str):
         return Response(content="File not found", status_code=404)
     os.remove(file_path)
     return Response(content="File deleted", status_code=204)
-
-    
-    
