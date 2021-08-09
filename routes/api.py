@@ -1,6 +1,6 @@
 import os
 
-from fastapi import APIRouter, UploadFile
+from fastapi import APIRouter, UploadFile, Form
 
 UPLOAD_PATH = os.path.join(os.getcwd(), 'app', 'uploads')
 DISCORD_WEBHOOK = os.getenv('DISCORD_WEBHOOK')
@@ -19,7 +19,7 @@ webhook = discord.Webhook.from_url(DISCORD_WEBHOOK, adapter=discord.AsyncWebhook
 api_router = APIRouter()
 
 @api_router.post("/upload")
-async def upload(file: UploadFile):
+async def upload(file: UploadFile = Form(...)):
     filename = secrets.token_urlsafe(12)
     ext = guess_extension(file.content_type)
     if ext is None:
