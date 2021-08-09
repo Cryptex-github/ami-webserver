@@ -47,8 +47,8 @@ async def upload(file: UploadFile = Form(...)):
     delete_url = f"https://amidiscord.xyz/api/delete-file/{hmac_hash}/{filename}"
 
     embed = discord.Embed(title="**New file has been uploaded!**", description=url, timestamp=datetime.utcnow(), color=discord.Color.random())
-    embed.add_field(name="URL", value=url)
-    embed.add_field(name="Deletion URL", value=delete_url)
+    embed.add_field(name="URL", value=f"[**Click here to view!**]({url}}")
+    embed.add_field(name="Deletion URL", value=f"[**Click here to delete!**]({delete_url}}")
     embed.set_image(url=url)
 
     await webhook.send(embed=embed)
