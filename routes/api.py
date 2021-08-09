@@ -43,6 +43,7 @@ async def upload(file: UploadFile):
     embed = discord.Embed(title="**New file has been uploaded!**", description=url, timestamp=datetime.utcnow(), color=discord.Color.random())
     embed.add_field(name="URL", value=url)
     embed.add_field(name="Deletion URL", value=delete_url)
+    embed.set_image(url=url)
 
     await webhook.send(embed=embed)
 

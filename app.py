@@ -8,6 +8,7 @@ from routes.root import root_router
 
 app = FastAPI()
 app.include_router(api_router, prefix="/api")
+app.include_router(root_router, prefix="/")
 app.add_middleware(BaseHTTPMiddleware, auth)
 app.add_middleware(HTTPSRedirectMiddleware)
 
