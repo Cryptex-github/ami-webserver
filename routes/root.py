@@ -1,7 +1,7 @@
 import os
 
 UPLOAD_PATH = os.path.join(os.getcwd(), 'uploads')
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 from werkzeug.utils import safe_join
