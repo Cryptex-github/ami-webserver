@@ -7,8 +7,8 @@ from routes.api import api_router
 from routes.root import root_router
 
 origins = [
-    "http://amidiscord.com",
-    "https://amidiscord.com",
+    "http://amidiscord.xyz",
+    "https://amidiscord.xyz",
     "http://localhost:80",
 ]
 
