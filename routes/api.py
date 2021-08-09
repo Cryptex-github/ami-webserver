@@ -4,6 +4,7 @@ from dotenv import dotenv
 from fastapi import APIRouter, UploadFile
 
 dotenv()
+UPLOAD_PATH = os.path.join(os.getcwd(), 'app', 'uploads')
 DISCORD_WEBHOOK = os.getenv('DISCORD_WEBHOOKS')
 SECRET_KEY = os.getenv('SECRET_KEY')
 import hmac
@@ -29,7 +30,7 @@ async def upload(file: UploadFile):
     if os.path.isdir("/app/uploads/") is False:
         os.mkdir("/app/uploads/")
     
-    save_path = safe_join("/app/uploads/", filename)
+    save_path = safe_join(UPLOAD_PATH, filename)
     await file.seek(0)
 
     await file.save(save_path)
@@ -54,7 +55,7 @@ async def delete_file(hmac_hash: str, filename: str):
     _hmac_hash = hmac.new(SECRET_KEY.encode(), f"{filename}.{filename.split('.')[-1]}".encode(), "sha256").hexdigest()
     if hmac.compare_digest(hmac_hash, _hmac_hash) is False:
         return Response(content="File not found", status_code=404)
-    file_path = safe_join("/app/uploads/", filename)
+    file_path = safe_join(UPLOAD_PATH, filename)
     if os.path.isfile(file_path) is False:
         return Response(content="File not found", status_code=404)
     os.remove(file_path)
